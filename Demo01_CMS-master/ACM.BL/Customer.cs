@@ -1,40 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace CMS.BusinessLayer
+namespace CMS.BL
 {
     public class Customer
     {
-        public Customer()
-        {
-
-        }
-        public Customer(int customerId)
-        {
-            this.CustomerId = customerId;
-        }
-        public static int InstanceCount { get; set; }
-        
-        private string _lastName;
-        public string LastName
-        {
-            get
-            {
-                // Any code here
-                return _lastName;
-            }
-            set
-            {
-                // Any code here
-                _lastName = value;
-            }
-        }
+        public int CustomerId { get; set; }
         public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        public int CustomerId { get; private set; }
+        public List<Address> AddressList { get; set; }
+
         public string FullName
         {
             get
@@ -52,40 +27,19 @@ namespace CMS.BusinessLayer
             }
         }
 
-        /// <summary>
-        /// Retrieve one customer.
-        /// </summary>
-        public Customer Retrieve(int customerId)
+        public Customer() : this(0) { }
+
+        public Customer(int customerId)
         {
-            // Code that retrieves the defined customer
-            return new Customer();
+            CustomerId = customerId;
+            AddressList = new List<Address>();
         }
 
-        /// <summary>
-        /// Retrieves all customers.
-        /// </summary>
-        public List<Customer> Retrieve()
-        {
-            // Code that retrieves all customers
-            return new List<Customer>();
-        }
-
-        /// <summary>
-        /// Saves the current customer.
-        /// </summary>
-        /// <returns></returns>
-        public bool Save()
-        {
-            // Code that saves the defined customer
-            return true;
-        }
         public bool Validate()
         {
             var isValid = true;
-
             if (string.IsNullOrWhiteSpace(LastName)) isValid = false;
             if (string.IsNullOrWhiteSpace(EmailAddress)) isValid = false;
-
             return isValid;
         }
     }
